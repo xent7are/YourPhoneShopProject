@@ -36,6 +36,7 @@
     <Folder Include="static\" />
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
+    <Folder Include="static\images\" />
     <Folder Include="static\scripts\" />
     <Folder Include="views\" />
   </ItemGroup>
@@ -48,6 +49,20 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\images\blueHeart.png" />
+    <Content Include="static\images\checkMark.png" />
+    <Content Include="static\images\honor.jpg" />
+    <Content Include="static\images\iPhone15.png" />
+    <Content Include="static\images\logo.png" />
+    <Content Include="static\images\magnifier.png" />
+    <Content Include="static\images\pixel.jpg" />
+    <Content Include="static\images\poco.jpg" />
+    <Content Include="static\images\realme.jpg" />
+    <Content Include="static\images\rubbish.png" />
+    <Content Include="static\images\samsungA35.png" />
+    <Content Include="static\images\star.png" />
+    <Content Include="static\images\whiteHeart.png" />
+    <Content Include="static\images\xiaomi.png" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />
