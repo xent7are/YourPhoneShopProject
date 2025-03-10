@@ -12,6 +12,7 @@
         margin: 0;
         padding: 0;
         background-color: #f8f8f8;
+        letter-spacing: 1px;
       }
 
       .container {
@@ -46,7 +47,7 @@
       }
 
      .sidebar li {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         padding: 0;
         border-radius: 10px;
         background-color: #d0ffff;
@@ -62,6 +63,7 @@
 
       .checkbox-container input[type="checkbox"] {
         margin: 0;
+        margin-right: 5px;
       }
 
        .product-list {
@@ -137,7 +139,7 @@
             <section class="product-list">
                 <div class="product-card">
                     <img src="/static/images/samsungA35.png" alt="Samsung">
-                    <div class="product-name" >Samsung Ultra 3000</div>
+                    <div class="product-name" >Samsung A35</div>
                     <div class="product-price">$999.99</div>
                     <button class="favorite-button">&#10084;</button>
                 </div>
