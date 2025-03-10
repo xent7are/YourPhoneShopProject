@@ -1,29 +1,173 @@
 % rebase('layout.tpl', title='Home Page', year=year)
 
-<div class="jumbotron">
-    <h1>Bottle</h1>
-    <p class="lead">Bottle is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://bottlepy.org/docs/dev/index.html" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Phone Store</title>
+    <style>
+      body {
+        font-family: Gill Sans MT;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Bottle gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://bottlepy.org/docs/dev/index.html">Learn more &raquo;</a></p>
+      .container {
+        max-width: 1300px;
+        margin: 0;
+        padding: 2px;
+      }
+
+      main {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .sidebar {
+        width: 260px;
+        background-color: #e0ffff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-right: 40px;
+        position: sticky;
+        top: 20px;
+      }
+
+      .sidebar h3 {
+        margin-top: 0;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+     .sidebar li {
+        margin-bottom: 10px;
+        padding: 0;
+        border-radius: 10px;
+        background-color: #d0ffff;
+        cursor: pointer;
+      }
+
+
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        padding-left: 8px; 
+      }
+
+      .checkbox-container input[type="checkbox"] {
+        margin: 0;
+      }
+
+       .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 10px; 
+        gap: 40px;
+      }
+
+      .product-card {
+        width: auto;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        text-align: center;
+        background-color: #f0ffff;
+      }
+
+      .product-card img {
+        max-width: 100%;
+        height: 240px;
+        width: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        object-fit: contain;
+      }
+
+      .product-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .product-price {
+        font-size: 1.2em;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      .favorite-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5em;
+        color: #ccc;
+      }
+
+      .favorite-button.active {
+        color: #e91e63;
+      }
+
+    </style>
+
+
+</head>
+<body>
+
+    <div class="container">
+
+
+        <main>
+            <aside class="sidebar">
+                <h3>Select Phone Models</h3>
+                <ul>
+                    <li class="checkbox-container"><input type="checkbox"> Samsung</li>
+                    <li class="checkbox-container"><input type="checkbox"> Apple</li>
+                    <li class="checkbox-container"><input type="checkbox"> Honor</li>
+                    <li class="checkbox-container"><input type="checkbox"> Xiaomi</li>
+                    <li class="checkbox-container"><input type="checkbox"> Pixel</li>
+                </ul>
+            </aside>
+            <section class="product-list">
+                <div class="product-card">
+                    <img src="/static/images/samsungA35.png" alt="Samsung">
+                    <div class="product-name" >Samsung Ultra 3000</div>
+                    <div class="product-price">$999.99</div>
+                    <button class="favorite-button">&#10084;</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="/static/images/honor.jpg" alt="Honor">
+                    <div class="product-name">Honor 5</div>
+                    <div class="product-price">$899.99</div>
+                    <button class="favorite-button">&#10084;</button>
+                </div>
+                <div class="product-card">
+                    <img src="/static/images/iPhone15.png" alt="iPhone">
+                    <div class="product-name">iPhone 15</div>
+                    <div class="product-price">$999.99</div>
+                    <button class="favorite-button">&#10084;</button>
+                </div>
+            </section>
+        </main>
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    <script>
+        const favoriteButtons = document.querySelectorAll('.favorite-button');
+
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
