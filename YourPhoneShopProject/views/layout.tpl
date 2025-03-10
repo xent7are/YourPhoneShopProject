@@ -12,8 +12,7 @@
 
 <body>
     <header>
-        <!-- Here must be name of css-file -->
-        <link rel="stylesheet" href="#">
+        <link rel="stylesheet" href="static/content/header.css">
 
         <div class="logo">
             <a href="/home">
