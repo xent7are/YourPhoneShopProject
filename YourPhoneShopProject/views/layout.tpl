@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!--Our header-->
     <header>
         <link rel="stylesheet" href="static/content/header.css">
 
