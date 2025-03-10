@@ -58,6 +58,7 @@
     <Content Include="static\images\pixel.jpg" />
     <Content Include="static\images\poco.jpg" />
     <Content Include="static\images\realme.jpg" />
+    <Content Include="static\images\redHeart.png" />
     <Content Include="static\images\rubbish.png" />
     <Content Include="static\images\samsungA35.png" />
     <Content Include="static\images\star.png" />
