@@ -31,11 +31,12 @@
         </div>
 
         <div class="favorites">
-            <a href="/about">
-                <img src="/static/images/blueHeart.png" alt="Favorites">
-                <span>Favorites</span>
-            </a>
-        </div>
+        <a href="/favorites">
+            <img src="/static/images/blueHeart.png" alt="Favorites">
+            <span>Favorites</span>
+        </a>
+    </div>
+
     </header>
 
     <div class="container body-content">
