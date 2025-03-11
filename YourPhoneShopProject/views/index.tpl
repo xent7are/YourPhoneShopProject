@@ -139,7 +139,9 @@
             <section class="product-list">
                 <div class="product-card">
                     <img src="/static/images/samsungA35.png" alt="Samsung">
-                    <div class="product-name" >Samsung A35</div>
+                    <a href="/viewingProduct">
+                        <div class="product-name" >Samsung A35</div>
+                    </a>
                     <div class="product-price">$999.99</div>
                     <button class="favorite-button">&#10084;</button>
                 </div>
