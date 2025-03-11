@@ -28,4 +28,8 @@ if __name__ == '__main__':
     def favorites():
         return template('views/viewFav.tpl', title='Favorites', year=2025)
 
+    @bottle.route('/viewingProduct')
+    def favorites():
+        return template('views/viewingProduct.tpl', title='Product', year=2025)
+
     bottle.run(server='wsgiref', host=HOST, port=PORT)
