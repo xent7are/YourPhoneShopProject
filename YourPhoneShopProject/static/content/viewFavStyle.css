@@ -1,1 +1,140 @@
+body {
+    font-family: 'Gill Sans MT', sans-serif;
+    background-color: #f8f8f8;
+    color: #0B3F5A;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+}
 
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+h2 {
+    text-align: left;
+    color: #0B3F5A;
+    margin-bottom: 20px;
+}
+
+.favorite-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+
+.favorite-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+    .favorite-card img {
+        width: 200px;
+        height: auto;
+    }
+
+.favorite-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.favorite-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0B3F5A;
+    margin-bottom: 5px;
+}
+
+.favorite-specs {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.favorite-availability {
+    font-size: 0.9em;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.favorite-rating {
+    font-size: 1.1em;
+    color: #0B3F5A;
+    margin-bottom: 10px;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.rating-value {
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.rating-star {
+    width: 16px;
+    height: 16px;
+    max-width: 20px;
+}
+
+.favorite-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #0B3F5A;
+    margin: 10px 0px;
+}
+
+.book-smartphone {
+    background-color: #D8D8F1;
+    color: #124176;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 50px;
+    min-width: 150px;
+}
+
+    .book-smartphone:hover {
+        background-color: #215F7F;
+        color: white;
+    }
+
+.remove-favorite {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+    .remove-favorite img {
+        width: 70px;
+        height: auto;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        margin-right: 40px;
+    }
+
+    .remove-favorite:hover img {
+        opacity: 1;
+    }
+
+#empty-favorites-message {
+    margin: 50px;
+    font-size: 22px;
+}
