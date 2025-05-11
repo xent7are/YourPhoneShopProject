@@ -37,6 +37,7 @@
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
+    <Folder Include="static\jsons\" />
     <Folder Include="static\scripts\" />
     <Folder Include="views\" />
   </ItemGroup>
@@ -52,10 +53,14 @@
     <Content Include="static\content\viewingProductStyle.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="static\content\viewUsersStyle.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\images\account.png" />
     <Content Include="static\images\blueHeart.png" />
     <Content Include="static\images\checkMark.png" />
     <Content Include="static\images\honor.jpg" />
@@ -71,6 +76,9 @@
     <Content Include="static\images\star.png" />
     <Content Include="static\images\whiteHeart.png" />
     <Content Include="static\images\xiaomi.png" />
+    <Content Include="static\jsons\active_users.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />
@@ -92,6 +100,9 @@
     <Content Include="views\layout.tpl" />
     <Content Include="views\viewFav.tpl" />
     <Content Include="views\viewingProduct.tpl">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\viewUsers.tpl">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>

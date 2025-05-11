@@ -1,0 +1,47 @@
+/* static/content/viewUsersStyle.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.user-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.user-email, .user-last-active {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.remove-user {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+    .remove-user img {
+        width: 20px;
+        height: 20px;
+    }
