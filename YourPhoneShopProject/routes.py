@@ -4,6 +4,7 @@ Routes and views for the bottle application.
 
 from bottle import route, view
 from datetime import datetime
+import json
 
 @route('/')
 @route('/home')
@@ -32,4 +33,21 @@ def about():
         title='About',
         message='Your application description page.',
         year=datetime.now().year
+    )
+
+@route('/users')
+@view('viewUsers')
+def show_users():
+    try:
+        with open('static\\jsons\\active_users.json', 'r', encoding='utf-8') as file:
+            users = json.load(file)
+        print("users:", users)
+    except FileNotFoundError:
+        users = []
+        print("users:", users)
+
+    return dict(
+        users=users,
+        title='Users',
+        year=2025
     )
