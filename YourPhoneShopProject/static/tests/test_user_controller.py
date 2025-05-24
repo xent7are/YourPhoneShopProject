@@ -5,63 +5,63 @@ import os
 import sys
 
 try:
-    # Импорт функциb из модуля user_controller
+    # РРјРїРѕСЂС‚ С„СѓРЅРєС†Рёb РёР· РјРѕРґСѓР»СЏ user_controller
     from static.controllers.user_controller import validate_user_form
 except ImportError as e:
     print(f"Import error: {e}")
     raise
 
-# Добавление корневой директории проекта в sys.path для корректного импорта модулей
+# Р”РѕР±Р°РІР»РµРЅРёРµ РєРѕСЂРЅРµРІРѕР№ РґРёСЂРµРєС‚РѕСЂРёРё РїСЂРѕРµРєС‚Р° РІ sys.path РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РёРјРїРѕСЂС‚Р° РјРѕРґСѓР»РµР№
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 
 class TestUserController(unittest.TestCase):
     def setUp(self):
-        # корректные данные для регистрации
+        # РєРѕСЂСЂРµРєС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ РґР»СЏ СЂРµРіРёСЃС‚СЂР°С†РёРё
         self.valid_data = {
             'name': 'JohnDoe',
             'email': 'john@gmail.com',
             'phone': '+79123456789',
             'birth_date': '2000-01-01'
         }
-        # мнимый зарегистрированный пользователь
+        # РјРЅРёРјС‹Р№ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
         self.existing_users = [
             {'name': 'JaneDoe', 'email': 'jane@gmail.com', 'phone': '+79123456788', 'birth_date': '1999-01-01'}
         ]
 
-    # тест на дату рождения в будущем
+    # С‚РµСЃС‚ РЅР° РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ РІ Р±СѓРґСѓС‰РµРј
     def test_birth_date_future(self):
         data = self.valid_data.copy()
-        data['birth_date'] = '2025-12-01'  # некорректная дата рождения
+        data['birth_date'] = '2025-12-01'  # РЅРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РґР°С‚Р° СЂРѕР¶РґРµРЅРёСЏ
         errors = validate_user_form(data, file=None, existing_users=self.existing_users)
         self.assertIn("Birth Date cannot be in the future!", errors)
 
-    # тест на дату рождения с несуществующим месяцем
+    # С‚РµСЃС‚ РЅР° РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ СЃ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РјРµСЃСЏС†РµРј
     def test_birth_date_invalid_format(self):
         data = self.valid_data.copy()
-        data['birth_date'] = '2000-13-01'  # некорректная дата рождения
+        data['birth_date'] = '2000-13-01'  # РЅРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РґР°С‚Р° СЂРѕР¶РґРµРЅРёСЏ
         errors = validate_user_form(data, file=None, existing_users=self.existing_users)
         self.assertIn("Invalid Birth Date. Please check the entered values!", errors)
 
-    # тест на номер телефона в некорректном формате
+    # С‚РµСЃС‚ РЅР° РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР° РІ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРј С„РѕСЂРјР°С‚Рµ
     def test_phone_invalid_format(self):
         data = self.valid_data.copy()
-        data['phone'] = '12345'  # некорректный номер телефона
+        data['phone'] = '12345'  # РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°
         errors = validate_user_form(data, file=None, existing_users=self.existing_users)
         self.assertIn("Phone number format is invalid. Use correct format (e.g., +71234567890)!", errors)
 
-    # тест на уже зарегистрированный номер телефона
+    # С‚РµСЃС‚ РЅР° СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Р№ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°
     def test_phone_already_registered(self):
         data = self.valid_data.copy()
-        data['phone'] = '+79123456788'  # некорректный номер телефона
+        data['phone'] = '+79123456788'  # РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°
         errors = validate_user_form(data, file=None, existing_users=self.existing_users)
         self.assertIn("This phone number is already registered!", errors)
 
         
-    # тест на уже зарегистрированную почту
+    # С‚РµСЃС‚ РЅР° СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅСѓСЋ РїРѕС‡С‚Сѓ
     def test_email_already_registered(self):
         data = self.valid_data.copy()
-        data['email'] = 'jane@gmail.com'  # некорректный адрес почты
+        data['email'] = 'jane@gmail.com'  # РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ Р°РґСЂРµСЃ РїРѕС‡С‚С‹
         errors = validate_user_form(data, file=None, existing_users=self.existing_users)
         self.assertIn("This email is already registered!", errors)
 
