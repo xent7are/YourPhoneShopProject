@@ -7,7 +7,7 @@ import phonenumbers
 from phonenumbers import NumberParseException, is_valid_number
 
 def get_users():
-    # Читает список пользователей из JSON-файла.
+    # ������ ������ ������������� �� JSON-�����.
     json_file = 'static/jsons/active_users.json'
     try:
         with open(json_file, 'r', encoding='utf-8') as file:
@@ -18,7 +18,7 @@ def get_users():
         raise
 
 def save_users(users):
-    # Сохраняет список пользователей в JSON-файл.
+    # ��������� ������ ������������� � JSON-����.
     json_file = 'static/jsons/active_users.json'
     try:
         with open(json_file, 'w', encoding='utf-8') as file:
@@ -147,13 +147,13 @@ def validate_user_form(data, file=None, existing_users=None):
     return errors
 
 def handle_users():
-    # Обрабатывает GET и POST запросы для страницы пользователей.
+    # ������������ GET � POST ������� ��� �������� �������������.
     users = get_users()
     errors = []
     form_data = {'name': '', 'email': '', 'phone': '', 'birth_date': ''}
 
     if request.method == 'POST':
-        # Получаем данные формы
+        # �������� ������ �����
         form_data['name'] = request.forms.get('name', '').strip()
         form_data['email'] = request.forms.get('email', '').strip()
         form_data['phone'] = request.forms.get('phone', '').strip()
@@ -163,7 +163,7 @@ def handle_users():
         # Валидация данных
         errors = validate_user_form(form_data, profile_picture, users)
 
-        # Если нет ошибок, добавляем пользователя
+        # ���� ��� ������, ��������� ������������
         if not errors:
             new_user = {
                 'name': form_data['name'],
@@ -173,26 +173,15 @@ def handle_users():
                 'registration_date': datetime.now().strftime('%Y-%m-%d'),
                 'profile_picture': None
             }
-
-            # Сохраняем фотографию, если она загружена
-            if profile_picture and profile_picture.file:
-                try:
-                    file_extension = profile_picture.filename.rsplit('.', 1)[-1].lower()
-                    filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{form_data['name'].replace(' ', '_')}.{file_extension}"
-                    save_path = os.path.join('static', 'images', 'profiles', filename)
-                    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-                    profile_picture.save(save_path, overwrite=True)
-                    new_user['profile_picture'] = f"/static/images/profiles/{filename}"
-                except Exception:
-                    errors.append("Не удалось сохранить изображение профиля.")
-
-            if not errors:
-                users.append(new_user)
-                users.sort(key=lambda x: x['registration_date'], reverse=True)
-                save_users(users)
-                response.set_header('Location', '/users')
-                response.status = 303
-                form_data = {'name': '', 'email': '', 'phone': '', 'birth_date': ''}
+            users.append(new_user)
+            # Сортировка по дате регистрации (новые в начале)
+            users.sort(key=lambda x: x['registration_date'], reverse=True)
+            save_users(users)
+            # Перенаправление для очистки формы
+            response.set_header('Location', '/users')
+            response.status = 303
+            # Очищаем форму после успешного добавления
+            form_data = {'name': '', 'email': '', 'phone': '', 'birth_date': ''}
 
     # Сортируем пользователей по дате регистрации (новые первыми)
     users.sort(key=lambda x: x['registration_date'], reverse=True)
@@ -206,7 +195,7 @@ def handle_users():
     }
 
 def delete_user():
-    # Удаляет пользователя по ID.
+    # ������� ������������ �� ID.
     user_id = request.json.get('user_id')
     users = get_users()
     if 0 <= int(user_id) < len(users):
