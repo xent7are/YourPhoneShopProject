@@ -4,7 +4,7 @@ from datetime import datetime
 from static.controllers.validate_users import validate_user_form
 
 def get_users():
-    # Читает список пользователей из JSON-файла.
+    # пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ JSON-пїЅпїЅпїЅпїЅпїЅ.
     json_file = 'static/jsons/active_users.json'
     try:
         with open(json_file, 'r', encoding='utf-8') as file:
@@ -13,28 +13,28 @@ def get_users():
         return []
 
 def save_users(users):
-    # Сохраняет список пользователей в JSON-файл.
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ JSON-пїЅпїЅпїЅпїЅ.
     json_file = 'static/jsons/active_users.json'
     with open(json_file, 'w', encoding='utf-8') as file:
         json.dump(users, file, ensure_ascii=False, indent=4)
 
 def handle_users():
-    # Обрабатывает GET и POST запросы для страницы пользователей.
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GET пїЅ POST пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     users = get_users()
     errors = []
     form_data = {'name': '', 'email': '', 'phone': '', 'birth_date': ''}
 
     if request.method == 'POST':
-        # Получаем данные формы
+        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         form_data['name'] = request.forms.get('name', '').strip()
         form_data['email'] = request.forms.get('email', '').strip()
         form_data['phone'] = request.forms.get('phone', '').strip()
         form_data['birth_date'] = request.forms.get('birth_date', '').strip()
 
-        # Валидация данных
+        # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         errors = validate_user_form(form_data)
 
-        # Если нет ошибок, добавляем пользователя
+        # пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if not errors:
             new_user = {
                 'name': form_data['name'],
@@ -44,13 +44,13 @@ def handle_users():
                 'registration_date': datetime.now().strftime('%Y-%m-%d')
             }
             users.append(new_user)
-            # Сортировка по дате регистрации (новые в начале)
+            # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
             users.sort(key=lambda x: x['registration_date'], reverse=True)
             save_users(users)
-            # Перенаправление для очистки формы
+            # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             response.set_header('Location', '/users')
             response.status = 303
-            # Очищаем форму после успешного добавления
+            # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             form_data = {'name': '', 'email': '', 'phone': '', 'birth_date': ''}
 
     return {
@@ -62,7 +62,7 @@ def handle_users():
     }
 
 def delete_user():
-    # Удаляет пользователя по ID.
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ID.
     user_id = request.json.get('user_id')
     try:
         users = get_users()
