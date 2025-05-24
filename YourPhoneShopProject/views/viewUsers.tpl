@@ -13,7 +13,7 @@
 <div class="container">
     <h2>{{title}}</h2>
 
-    <form method="POST" action="/users">
+    <form method="POST" action="/users" enctype="multipart/form-data">
         <div>
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="{{form_data['name']}}">
@@ -28,28 +28,42 @@
         </div>
         <div>
             <label for="birth_date">Birth Date (YYYY-MM-DD):</label>
-            <input type="text" id="birth_date" name="birth_date" value="{{form_data['birth_date']}}">
+            <input type="date" id="birth_date" name="birth_date" value="{{form_data['birth_date']}}">
         </div>
+        <div class="file-input-wrapper">
+            <label for="profile_picture">Profile Picture (PNG, JPG, max 5MB):</label>
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/png,image/jpeg" class="file-input">
+            <button type="button" class="file-input-button">Choose File</button>
+            <span class="file-name">No file chosen</span>
+        </div>
+
+        % if errors:
+            <div class="errors">
+                <ul>
+                    % for error in errors:
+                        <li>{{error}}</li>
+                    % end
+                </ul>
+            </div>
+        % end
+
+        <div id="empty-users-message" style="display: {{'block' if not users else 'none'}};">
+            <p>No active users found.</p>
+        </div>
+
         <button type="submit">Add User</button>
     </form>
-
-    % if errors:
-        <div class="errors">
-            <ul>
-                % for error in errors:
-                    <li>{{error}}</li>
-                % end
-            </ul>
-        </div>
-    % end
-
-    <div id="empty-users-message" style="display: {{'block' if not users else 'none'}};">
-        <p>No active users found.</p>
-    </div>
 
     <section class="user-list">
         % for i, user in enumerate(users):
             <div class="user-card" data-user-id="{{i}}">
+                <div class="user-profile-picture">
+                    % if user['profile_picture']:
+                        <img src="{{user['profile_picture']}}" alt="{{user['name']}}'s profile picture">
+                    % else:
+                        <img src="/static/images/user_icons/default_profile.png" alt="Default profile picture">
+                    % end
+                </div>
                 <div class="user-info">
                     <div class="user-name">{{user['name']}}</div>
                     <div class="user-email">Email: {{user['email']}}</div>
@@ -106,6 +120,23 @@
             emptyMessage.style.display = 'none';
         }
     }
+
+    // Handle file input display
+    const fileInput = document.querySelector('.file-input');
+    const fileNameDisplay = document.querySelector('.file-name');
+    const fileButton = document.querySelector('.file-input-button');
+
+    fileButton.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        } else {
+            fileNameDisplay.textContent = 'No file chosen';
+        }
+    });
 
     checkIfEmpty();
 </script>
