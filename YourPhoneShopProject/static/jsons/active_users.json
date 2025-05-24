@@ -1,14 +1,30 @@
 [
-	{
-		"name": "Chernyshova Sofya",
-		"email": "sof@mail.ru"
-	},
-	{
-		"name": "Stebunov Nikita",
-		"email": "nikita224@gmail.com"
-	},
-	{
-		"name": "Xrustaleva Uliana",
-		"email": "xrust@mail.ru"
-	}
+    {
+        "name": "Chernyshova Sofya",
+        "email": "sof@mail.ru",
+        "phone": "+71234567890",
+        "birth_date": "2000-01-15",
+        "registration_date": "2025-05-24"
+    },
+    {
+        "name": "Stebunov Nikita",
+        "email": "nikita224@gmail.com",
+        "phone": "+71234567891",
+        "birth_date": "1998-07-22",
+        "registration_date": "2025-05-24"
+    },
+    {
+        "name": "Xrustaleva Uliana",
+        "email": "xrust@mail.ru",
+        "phone": "+71234567892",
+        "birth_date": "1995-03-10",
+        "registration_date": "2025-05-24"
+    },
+    {
+        "name": "Ð§ÐµÑÐ½ÑÑÐ¾Ð²Ð° Ð¡Ð¾ÑÑÑ ÐÐµÐ¾Ð½Ð¸Ð´Ð¾Ð²Ð½Ð°",
+        "email": "sof4ern@mail.ru",
+        "phone": "+79817157880",
+        "birth_date": "2025-02-04",
+        "registration_date": "2025-05-24"
+    }
 ]

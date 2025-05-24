@@ -2,9 +2,9 @@
 Routes and views for the bottle application.
 """
 
-from bottle import route, view
+from bottle import route, view, request, response
 from datetime import datetime
-import json
+from static.controllers.user_controller import handle_users, delete_user
 
 @route('/')
 @route('/home')
@@ -12,6 +12,7 @@ import json
 def home():
     """Renders the home page."""
     return dict(
+        title='Home',
         year=datetime.now().year
     )
 
@@ -35,19 +36,16 @@ def about():
         year=datetime.now().year
     )
 
-@route('/users')
+@route('/users', method=['GET', 'POST'])
 @view('viewUsers')
-def show_users():
-    try:
-        with open('static\\jsons\\active_users.json', 'r', encoding='utf-8') as file:
-            users = json.load(file)
-        print("users:", users)
-    except FileNotFoundError:
-        users = []
-        print("users:", users)
+def users():
+    """Renders the users page."""
+    result = handle_users()
+    if result is None:  # Перенаправление после POST
+        return
+    return result
 
-    return dict(
-        users=users,
-        title='Users',
-        year=2025
-    )
+@route('/delete_user', method='POST')
+def delete_user_route():
+    """Handles user deletion."""
+    return delete_user()
