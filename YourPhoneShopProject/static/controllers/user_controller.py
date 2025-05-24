@@ -1,4 +1,4 @@
-﻿import json
+import json
 import os
 import re
 from bottle import request, response

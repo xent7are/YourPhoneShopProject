@@ -34,9 +34,6 @@
     <Compile Include="static\controllers\user_controller.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="static\controllers\validate_users.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\" />
