@@ -2,8 +2,10 @@ import bottle
 import os
 import sys
 from bottle import template
+from datetime import datetime
 
 import routes
+from static.controllers.partners_controller import *
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     bottle.debug(True)
@@ -26,10 +28,10 @@ if __name__ == '__main__':
 
     @bottle.route('/favorites')
     def favorites():
-        return template('views/viewFav.tpl', title='Favorites', year=2025)
+        return template('views/viewFav.tpl', title='Favorites', year=datetime.now().year)
 
     @bottle.route('/viewingProduct')
-    def favorites():
-        return template('views/viewingProduct.tpl', title='Product', year=2025)
+    def viewing_product():
+        return template('views/viewingProduct.tpl', title='Product', year=datetime.now().year)
 
     bottle.run(server='wsgiref', host=HOST, port=PORT)

@@ -18,7 +18,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>YourPhoneShopProject</Name>
     <RootNamespace>YourPhoneShopProject</RootNamespace>
-    <InterpreterId>MSBuild|env3.9|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +31,9 @@
   <ItemGroup>
     <Compile Include="app.py" />
     <Compile Include="routes.py" />
+    <Compile Include="static\controllers\partners_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="static\controllers\user_controller.py">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,7 @@
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
+    <Folder Include="static\images\partners\" />
     <Folder Include="static\jsons\" />
     <Folder Include="static\controllers\" />
     <Folder Include="static\scripts\" />
@@ -52,6 +56,8 @@
     <Content Include="static\content\header.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="static\content\main_site.css" />
+    <Content Include="static\content\partners.css" />
     <Content Include="static\content\site.css" />
     <Content Include="static\content\viewFavStyle.css" />
     <Content Include="static\content\viewingProductStyle.css">
@@ -71,6 +77,8 @@
     <Content Include="static\images\iPhone15.png" />
     <Content Include="static\images\logo.png" />
     <Content Include="static\images\magnifier.png" />
+    <Content Include="static\images\partners.png" />
+    <Content Include="static\images\partners\4e46bb7dcd1b554d444daddb9b513ed9.jpg" />
     <Content Include="static\images\pixel.jpg" />
     <Content Include="static\images\poco.jpg" />
     <Content Include="static\images\realme.jpg" />
@@ -80,6 +88,7 @@
     <Content Include="static\images\star.png" />
     <Content Include="static\images\whiteHeart.png" />
     <Content Include="static\images\xiaomi.png" />
+    <Content Include="static\jsons\active_partners.json" />
     <Content Include="static\jsons\active_users.json">
       <SubType>Code</SubType>
     </Content>
@@ -106,6 +115,7 @@
     <Content Include="views\viewingProduct.tpl">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\partners.tpl" />
     <Content Include="views\viewUsers.tpl">
       <SubType>Code</SubType>
     </Content>

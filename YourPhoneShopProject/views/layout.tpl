@@ -36,7 +36,12 @@
             <span>Favorites</span>
           </a>
         </div>
-
+        <div class="partners">
+          <a href="/partners">
+            <img src="/static/images/partners.png" alt="Partners">
+            <span>Partners</span>
+          </a>
+        </div>
         <div class="users">
           <a href="/users">
             <img src="/static/images/account.png" alt="Users">
@@ -128,7 +133,8 @@
 
         <div class="footer-bottom">
             <p>&copy; {{ year }} YourPhoneShop. All rights reserved.</p>
-            <p><a href="/terms">Terms of Service</a> | <a href="/privacy">Privacy Policy</a></p>
+            <p><a href="/terms">Terms of Service</a> | 
+            <a href="/privacy">Privacy Policy</a></p>
         </div>
     </div>
 </footer>
