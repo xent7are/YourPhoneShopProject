@@ -23,7 +23,7 @@
             <input type="text" id="email" name="email" value="{{form_data['email']}}">
         </div>
         <div>
-            <label for="phone">Phone (e.g., +71234567890):</label>
+            <label for="phone">Phone (e.g., +71234567894):</label>
             <input type="text" id="phone" name="phone" value="{{form_data['phone']}}">
         </div>
         <div>
@@ -33,8 +33,9 @@
         <div class="file-input-wrapper">
             <label for="profile_picture">Profile Picture (PNG, JPG, max 5MB):</label>
             <input type="file" id="profile_picture" name="profile_picture" accept="image/png,image/jpeg" class="file-input">
+            <input type="hidden" name="profile_picture_name" value="{{form_data['profile_picture_name']}}">
             <button type="button" class="file-input-button">Choose File</button>
-            <span class="file-name">No file chosen</span>
+            <span class="file-name">{{form_data['profile_picture_name'] or 'No file chosen'}}</span>
         </div>
 
         % if errors:
@@ -47,12 +48,12 @@
             </div>
         % end
 
-        <div id="empty-users-message" style="display: {{'block' if not users else 'none'}};">
-            <p>No active users found.</p>
-        </div>
-
         <button type="submit">Add User</button>
     </form>
+    
+    <div id="empty-users-message" style="display: {{'block' if not users else 'none'}};">
+        <h3>No active users found.</h3>
+    </div>
 
     <section class="user-list">
         % for i, user in enumerate(users):
@@ -85,8 +86,14 @@
         button.addEventListener('click', function() {
             const userCard = this.parentElement;
             const userId = userCard.getAttribute('data-user-id');
+            const userName = userCard.querySelector('.user-name').textContent;
             
-            // Send AJAX request to delete user
+            // Show confirmation dialog
+            if (!confirm(`Are you sure you want to delete the user "${userName}"?`)) {
+                return;
+            }
+            
+            // Send request to delete user
             fetch('/delete_user', {
                 method: 'POST',
                 headers: {
@@ -134,7 +141,7 @@
         if (fileInput.files.length > 0) {
             fileNameDisplay.textContent = fileInput.files[0].name;
         } else {
-            fileNameDisplay.textContent = 'No file chosen';
+            fileNameDisplay.textContent = '{{form_data["profile_picture_name"] or "No file chosen"}}';
         }
     });
 
