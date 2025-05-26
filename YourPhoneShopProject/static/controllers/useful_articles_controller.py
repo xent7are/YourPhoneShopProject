@@ -7,7 +7,7 @@ from datetime import datetime
 import uuid
 from bottle import request, response
 import phonenumbers
-from phonenumbers import NumberParseException, is_valid_number
+from phonenumbers import NumberParseException
 
 # Функция для получения списка статей из JSON-файла
 def get_articles():
@@ -64,6 +64,8 @@ def validate_email(email):
         return False, "Доменная часть email слишком короткая. Минимальная длина — 4 символа."
     if len(domain_part) > 190:
         return False, "Доменная часть email слишком длинная. Максимальная длина — 190 символов."
+    if '..' in subject_part:
+        return False, "Email не может содержать последовательные точки в преддоменной части."
     # Определение списка разрешенных доменов
     allowed_domains = ['gmail.com', 'mail.ru', 'inbox.ru', 'yandex.ru']
     # Формирование паттерна для доменов
@@ -80,11 +82,14 @@ def validate_url(url):
     url = url.strip()
     if not url:
         return False, "Ссылка не может быть пустой."
-    # Регулярное выражение для строгого формата https://domain.tld/path
-    url_pattern = r'^https://[a-zA-Z0-9-]+\.[a-zA-Z]{2,6}(/[a-zA-Z0-9-._~:/?#[\]@!$&\'()*+,;=]*)?$'
+    # Регулярное выражение для формата https://[subdomain.]domain.tld/path без фрагментов (#) и символа @
+    url_pattern = r'^https://([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-zA-Z]{2,6}(/[a-zA-Z0-9-._~:/?[\]!$&\'()*+,;=]*)?$'
     # Проверка соответствия URL паттерну
     if not re.match(url_pattern, url):
         return False, "Недопустимый формат ссылки. Используйте формат https://domain.tld/path."
+    # Дополнительная проверка на отсутствие фрагмента (#)
+    if '#' in url:
+        return False, "URL не должен содержать фрагменты (например, #catalog)."
     return True, url
 
 # Функция для проверки имени автора
@@ -96,9 +101,9 @@ def validate_author(author):
         return False, "Имя автора должно содержать минимум 3 символа."
     if len(author) > 50:
         return False, "Имя автора не должно превышать 50 символов."
-    # Проверка на английские буквы и цифры
-    if not re.match(r'^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$', author):
-        return False, "Имя автора должно содержать только английские буквы и цифры, без лишних пробелов."
+    # Проверка на английские буквы, цифры, подчеркивания и дефисы
+    if not re.match(r'^[a-zA-Z0-9_-]+(?: [a-zA-Z0-9_-]+)*$', author):
+        return False, "Имя автора должно содержать только английские буквы, цифры, подчеркивания, дефисы и одиночные пробелы."
     # Проверка на недопустимые имена вроде "a a a"
     if re.match(r'^(?:\w\s+){2,}\w$', author):
         return False, "Имя автора не может состоять из отдельных букв, разделенных пробелами."
@@ -127,19 +132,24 @@ def validate_phone(phone):
     phone = phone.strip()
     if not phone:
         return False, "Номер телефона не может быть пустым."
+    # Проверка на пробелы
+    if ' ' in phone:
+        return False, "Номер телефона не может содержать пробелы."
     # Проверка начала номера на +7
     if not phone.startswith('+7'):
         return False, "Номер телефона должен начинаться с +7."
+    # Проверка длины номера (должно быть 12 символов: +7 и 10 цифр)
+    if len(phone) != 12:
+        return False, "Номер телефона должен содержать 10 цифр после +7."
+    # Проверка, что после +7 идут только цифры
+    if not phone[1:].isdigit():
+        return False, "Номер телефона должен содержать только цифры после +7."
     try:
         # Парсинг номера телефона
-        parsed_phone = phonenumbers.parse(phone, None)
-        # Проверка валидности номера
-        if not is_valid_number(parsed_phone):
-            return False, "Недопустимый номер телефона. Используйте формат +71234567890."
+        parsed_phone = phonenumbers.parse(phone, "RU")
+        return True, phone
     except NumberParseException:
-        # Возврат ошибки при неверном формате
         return False, "Неверный формат номера телефона. Используйте формат +71234567890."
-    return True, phone
 
 # Функция для проверки описания статьи
 def validate_description(description):
@@ -152,10 +162,10 @@ def validate_description(description):
         return False, "Описание не должно превышать 300 символов."
     # Подсчет букв
     letter_count = sum(c.isalpha() for c in description)
-    if letter_count < 50:
-        return False, "Описание должно содержать минимум 50 букв."
+    if letter_count < 47:
+        return False, "Описание должно содержать минимум 47 букв."
     # Проверка на английские буквы, цифры, пробелы и специальные символы
-    if not re.match(r'^[a-zA-Z0-9,.!?;:\-\'\"&()]+(?: [a-zA-Z0-9,.!?;:\-\'\"&()]+)*$', description):
+    if not re.match(r'^[a-zA-Z0-9,.!?;:\-\'\"&() ]+$', description):
         return False, "Описание должно содержать только английские буквы, цифры, пробелы и разрешенные символы (,.!?;:-'\"&())."
     return True, description
 
@@ -163,6 +173,9 @@ def validate_description(description):
 def validate_image(image_file):
     if image_file is None or not image_file.filename:
         return False, "Изображение обязательно для загрузки."
+    # Проверка на пробелы в имени файла
+    if ' ' in image_file.filename:
+        return False, "Имя файла изображения не может содержать пробелы."
     # Проверка формата изображения
     allowed_extensions = ['.png', '.jpg', '.jpeg']
     # Извлечение расширения файла
