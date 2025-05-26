@@ -8,13 +8,13 @@ import uuid
 PARTNERS_FILE = 'static/jsons/active_partners.json'
 UPLOAD_DIR = 'static/images/partners'
 
-def load_partners():# загрузка файла с партнёрами
+def load_partners(): # загрузка файла с партнёрами
     if os.path.exists(PARTNERS_FILE):
         with open(PARTNERS_FILE, 'r') as f:
             return json.load(f)
     return []
 
-def save_partners(partners):# сохранение партнёров в файл
+def save_partners(partners): # сохранение партнёров в файл
     with open(PARTNERS_FILE, 'w') as f:
         json.dump(partners, f, indent=4)
 
@@ -32,6 +32,7 @@ def partners_post(): # запись данных из формы добавления партнёров
     address = request.forms.get('address').strip()
     region_code = request.forms.get('region_code').strip()
     phone = request.forms.get('phone').strip()
+    description = request.forms.get('description').strip()
     partner_logo = request.files.get('partner_logo')
     
     errors = []
@@ -40,12 +41,15 @@ def partners_post(): # запись данных из формы добавления партнёров
         'email': email,
         'address': address,
         'region_code': region_code,
-        'phone': phone
+        'phone': phone,
+        'description': description
     }
     
     # Проверки
     if not name:
         errors.append("Name or Company is required.")
+    elif len(name) > 100:
+        errors.append("Name must not exceed 100 characters.")
     if not email:
         errors.append("Email is required.")
     elif not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
@@ -70,16 +74,25 @@ def partners_post(): # запись данных из формы добавления партнёров
         if not partner_logo.content_type in ['image/png', 'image/jpeg']:
             errors.append("Logo must be a PNG or JPG file.")
     
-    if errors: # загружаем нового пользователя в отсортированный список
+    if errors: # при наличии ошибок возвращаем форму с сохранёнными данными
         partners = load_partners()
         partners.sort(key=lambda x: x.get('date', ''), reverse=True)
+        # Сохраняем информацию о логотипе (имя файла) в form_data
+        if partner_logo:
+            form_data['logo_filename'] = partner_logo.filename
+            # Временно сохраняем файл, чтобы пользователь не загружал его повторно
+            os.makedirs(UPLOAD_DIR, exist_ok=True)
+            temp_filename = f"temp_{uuid.uuid4()}{os.path.splitext(partner_logo.filename)[1].lower()}"
+            temp_path = os.path.join(UPLOAD_DIR, temp_filename)
+            partner_logo.save(temp_path)
+            form_data['temp_logo_path'] = f"/{temp_path}"
         return template('partners.tpl', partners=partners, errors=errors, form_data=form_data, year=datetime.now().year)
     
     # Сохранение логотипа партнёра
     logo_path = ''
     if partner_logo:
-        os.makedirs(UPLOAD_DIR, exist_ok=True) # создание директории для сохранения
-        file_extension = os.path.splitext(partner_logo.filename)[1].lower() # извлечение расширения из загруженного файла
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        file_extension = os.path.splitext(partner_logo.filename)[1].lower()
         filename = f"{uuid.uuid4()}{file_extension}"
         logo_path = f"/{UPLOAD_DIR}/{filename}"
         partner_logo.save(os.path.join(UPLOAD_DIR, filename))
@@ -92,12 +105,16 @@ def partners_post(): # запись данных из формы добавления партнёров
         'address': address,
         'region_code': region_code,
         'phone': phone,
-        'description': request.forms.get('description').strip(),
+        'description': description,
         'date': datetime.now().strftime('%Y-%m-%d'),
         'logo': logo_path
     }
     partners.append(new_partner)
     save_partners(partners)
+    
+    # Удаление временного файла логотипа, если он был создан
+    if 'temp_logo_path' in form_data and os.path.exists(form_data['temp_logo_path'].lstrip('/')):
+        os.remove(form_data['temp_logo_path'].lstrip('/'))
     
     # Очистка формы
     return template('partners.tpl', partners=partners, errors=None, form_data={}, year=datetime.now().year)

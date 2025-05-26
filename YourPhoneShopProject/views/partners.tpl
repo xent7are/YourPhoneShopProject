@@ -47,7 +47,12 @@
                         <label for="partner_logo">Partner Logo (PNG, JPG, max 5MB)</label>
                         <input type="file" id="partner_logo" name="partner_logo" accept="image/png,image/jpeg" class="file-input">
                         <button type="button" class="file-input-button">Choose File</button>
-                        <span class="file-name">No file chosen</span>
+                        <span class="file-name">{{ form_data.get('logo_filename', 'No file chosen') }}</span>
+                        % if form_data.get('temp_logo_path'):
+                            <input type="hidden" name="temp_logo_path" value="{{ form_data.get('temp_logo_path') }}">
+                            <input type="hidden" name="logo_filename" value="{{ form_data.get('logo_filename') }}">
+                            <img src="{{ form_data.get('temp_logo_path') }}" alt="Uploaded logo" style="max-width: 200px; margin-top: 10px;">
+                        % end
                     </div>
                     <button type="submit">Add Partner</button>
                 </form>
@@ -102,8 +107,6 @@
     fileInput.addEventListener('change', () => {
         if (fileInput.files.length > 0) {
             fileNameDisplay.textContent = fileInput.files[0].name;
-        } else {
-            fileNameDisplay.textContent = 'No file chosen';
         }
     });
 
