@@ -18,8 +18,10 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>YourPhoneShopProject</Name>
     <RootNamespace>YourPhoneShopProject</RootNamespace>
-    <InterpreterId>MSBuild|env_nik|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env3.9|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>unittest</TestFramework>
+    <UnitTestPattern>test*.py</UnitTestPattern>
+    <UnitTestRootDirectory>static/tests/</UnitTestRootDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,12 +55,14 @@
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
+    <Folder Include="static\images\user_icons\" />
     <Folder Include="static\images\articles\" />
     <Folder Include="static\images\partners\" />
     <Folder Include="static\jsons\" />
     <Folder Include="static\controllers\" />
     <Folder Include="static\scripts\" />
     <Folder Include="static\tests\" />
+    <Folder Include="static\tests\__pycache__\" />
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +109,11 @@
     <Content Include="static\images\rubbish.png" />
     <Content Include="static\images\samsungA35.png" />
     <Content Include="static\images\star.png" />
+    <Content Include="static\images\user_icons\20250312_121023_Xrustaleva_Uliana.jpg" />
+    <Content Include="static\images\user_icons\20250313_123545_Chernyshova_Sofya.jpg" />
+    <Content Include="static\images\user_icons\default_profile.png" />
+    <Content Include="static\images\user_icons\photo_sonya.jpg" />
+    <Content Include="static\images\user_icons\photo_uliana.jpg" />
     <Content Include="static\images\usefulArticles.png" />
     <Content Include="static\images\whiteHeart.png" />
     <Content Include="static\images\xiaomi.png" />
@@ -130,6 +139,8 @@
     <Content Include="static\scripts\respond.js" />
     <Content Include="static\scripts\respond.min.js" />
     <Content Include="static\scripts\_references.js" />
+    <Content Include="static\tests\__pycache__\test_user_controller.cpython-39.pyc" />
+    <Content Include="static\tests\__pycache__\__init__.cpython-39.pyc" />
     <Content Include="views\about.tpl" />
     <Content Include="views\contact.tpl" />
     <Content Include="views\index.tpl" />
