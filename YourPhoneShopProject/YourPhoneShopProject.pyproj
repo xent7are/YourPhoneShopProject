@@ -34,6 +34,9 @@
     <Compile Include="static\controllers\partners_controller.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="static\controllers\useful_articles_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="static\controllers\user_controller.py">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +46,7 @@
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
+    <Folder Include="static\images\articles\" />
     <Folder Include="static\images\partners\" />
     <Folder Include="static\jsons\" />
     <Folder Include="static\controllers\" />
@@ -59,6 +63,9 @@
     <Content Include="static\content\main_site.css" />
     <Content Include="static\content\partners.css" />
     <Content Include="static\content\site.css" />
+    <Content Include="static\content\usefulArticlesStyle.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\content\viewFavStyle.css" />
     <Content Include="static\content\viewingProductStyle.css">
       <SubType>Code</SubType>
@@ -71,6 +78,10 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="static\images\account.png" />
+    <Content Include="static\images\addArticle.png" />
+    <Content Include="static\images\articles\article1.jpg" />
+    <Content Include="static\images\articles\article2.jpg" />
+    <Content Include="static\images\articles\article3.jpg" />
     <Content Include="static\images\blueHeart.png" />
     <Content Include="static\images\checkMark.png" />
     <Content Include="static\images\honor.jpg" />
@@ -86,10 +97,14 @@
     <Content Include="static\images\rubbish.png" />
     <Content Include="static\images\samsungA35.png" />
     <Content Include="static\images\star.png" />
+    <Content Include="static\images\usefulArticles.png" />
     <Content Include="static\images\whiteHeart.png" />
     <Content Include="static\images\xiaomi.png" />
     <Content Include="static\jsons\active_partners.json" />
     <Content Include="static\jsons\active_users.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\jsons\articles.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\scripts\bootstrap.js" />
@@ -111,6 +126,9 @@
     <Content Include="views\contact.tpl" />
     <Content Include="views\index.tpl" />
     <Content Include="views\layout.tpl" />
+    <Content Include="views\usefulArticles.tpl">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\viewFav.tpl" />
     <Content Include="views\viewingProduct.tpl">
       <SubType>Code</SubType>
