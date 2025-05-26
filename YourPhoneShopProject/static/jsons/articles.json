@@ -1,0 +1,37 @@
+{
+  "authors": {
+    "admin": {
+      "email": "stebunovn14@gmail.com",
+      "phone": "+7-904-555-55-55",
+      "articles_by_date": {
+        "2025-05-10": [
+          {
+            "title": "How to choose a smartphone?",
+            "image": "/static/images/articles/article1.jpg",
+            "description": "Choosing a smartphone can be difficult due to the many models and functions. In this article, we will tell you which parameters to pay attention to processor, camera, battery and screen. Find out how to find the perfect phone for your needs!",
+            "link": "https://www.dns-shop.ru/guide/17a8a01d-1640-11e5-a679-00259074e77d/?ysclid=mb3t82arix10475809",
+            "time": "14:30"
+          }
+        ],
+        "2025-05-09": [
+          {
+            "title": "How to extend the battery life?",
+            "image": "/static/images/articles/article2.jpg",
+            "description": "Tips for taking care of your phone's battery. Do not allow full discharge, avoid overheating, and use original chargers. These simple rules will save battery capacity for years.",
+            "link": "https://www.kaspersky.ru/resource-center/threats/smartphone-battery-saving-tips",
+            "time": "09:15"
+          }
+        ],
+        "2025-05-08": [
+          {
+            "title": "Safety glasses or protective films: which one to choose?",
+            "image": "/static/images/articles/article3.jpg",
+            "description": "The protective glass protects the screen better from impacts when falling, but it can crack at the edges from pinpoint impacts. The film is less noticeable on the screen, it perfectly protects against scratches, but it is not able to protect the display from serious impacts.",
+            "link": "https://journal.citilink.ru/articles/chto-luchshe-dlya-smartfona-zashitnaya-plenka-ili-steklo/?ysclid=mb3t71z7ja698037869",
+            "time": "11:45"
+          }
+        ]
+      }
+    }
+  }
+}

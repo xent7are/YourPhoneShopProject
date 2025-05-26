@@ -65,6 +65,20 @@ header {
     align-items: center;
 }
 
+.partners {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.articles {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .users {
     margin-right: 20px;
     display: flex;
@@ -73,6 +87,16 @@ header {
 }
 
 .favorites img {
+    width: 30px;
+    margin-bottom: 5px;
+}
+
+.partners img {
+    width: 45px;
+    margin-bottom: 5px;
+}
+
+.articles img {
     width: 30px;
     margin-bottom: 5px;
 }
@@ -87,6 +111,20 @@ a {
 }
 
 .favorites a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: inherit;
+}
+
+.partners a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: inherit;
+}
+
+.articles a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -149,7 +187,7 @@ footer {
     }
 
 .rating {
-    color: #ffc107; 
+    color: #ffc107;
 }
 
 .star {
