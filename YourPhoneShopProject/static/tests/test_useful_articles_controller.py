@@ -4,7 +4,7 @@ import os
 from unittest.mock import Mock
 from static.controllers.useful_articles_controller import validate_email, validate_url, validate_author, validate_title, validate_phone, validate_description, validate_image
 
-# Тестирование функции validate_email
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_email
 class TestValidateEmail(unittest.TestCase):
     def test_valid_emails(self):
         valid_emails = [
@@ -19,30 +19,30 @@ class TestValidateEmail(unittest.TestCase):
             "test.user@inbox.ru"
         ]
         for email in valid_emails:
-            self.assertTrue(validate_email(email)[0], f"Email: {email} должен быть корректным")
+            self.assertTrue(validate_email(email)[0], f"Email: {email} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_emails(self):
         invalid_emails = [
-            "",                                 # Пустая строка
-            "   ",                              # Строка из пробелов
-            "nikita" * 40 + "@gmail.com",       # Слишком длинный email
-            "nikita",                           # Без @
-            "nikita@",                          # Без домена
-            "ni@gmail.com",                     # Короткая преддоменная часть
-            "nikita" * 11 + "@gmail.com",       # Длинная преддоменная часть
-            "nikita@com",                       # Короткая доменная часть
-            "nikita@" + "a" * 191,              # Длинная доменная часть
-            "nikita.stebunov@mail.com",         # Недопустимый домен
-            "никита.стебунов@gmail.com",        # Русские символы
-            "nikita..stebunov@gmail.com",       # Двойная точка
-            "nikita#stebunov@gmail.com",        # Недопустимый символ
-            "nikita@ stebunov@gmail.com",       # Пробел в домене
-            "nikita@@gmail.com"                 # Две @@
+            "",                                 # РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+            "   ",                              # РЎС‚СЂРѕРєР° РёР· РїСЂРѕР±РµР»РѕРІ
+            "nikita" * 40 + "@gmail.com",       # РЎР»РёС€РєРѕРј РґР»РёРЅРЅС‹Р№ email
+            "nikita",                           # Р‘РµР· @
+            "nikita@",                          # Р‘РµР· РґРѕРјРµРЅР°
+            "ni@gmail.com",                     # РљРѕСЂРѕС‚РєР°СЏ РїСЂРµРґРґРѕРјРµРЅРЅР°СЏ С‡Р°СЃС‚СЊ
+            "nikita" * 11 + "@gmail.com",       # Р”Р»РёРЅРЅР°СЏ РїСЂРµРґРґРѕРјРµРЅРЅР°СЏ С‡Р°СЃС‚СЊ
+            "nikita@com",                       # РљРѕСЂРѕС‚РєР°СЏ РґРѕРјРµРЅРЅР°СЏ С‡Р°СЃС‚СЊ
+            "nikita@" + "a" * 191,              # Р”Р»РёРЅРЅР°СЏ РґРѕРјРµРЅРЅР°СЏ С‡Р°СЃС‚СЊ
+            "nikita.stebunov@mail.com",         # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ РґРѕРјРµРЅ
+            "РЅРёРєРёС‚Р°.СЃС‚РµР±СѓРЅРѕРІ@gmail.com",        # Р СѓСЃСЃРєРёРµ СЃРёРјРІРѕР»С‹
+            "nikita..stebunov@gmail.com",       # Р”РІРѕР№РЅР°СЏ С‚РѕС‡РєР°
+            "nikita#stebunov@gmail.com",        # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
+            "nikita@ stebunov@gmail.com",       # РџСЂРѕР±РµР» РІ РґРѕРјРµРЅРµ
+            "nikita@@gmail.com"                 # Р”РІРµ @@
         ]
         for email in invalid_emails:
-            self.assertFalse(validate_email(email)[0], f"Email: {email} должен быть некорректным")
+            self.assertFalse(validate_email(email)[0], f"Email: {email} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
-# Тестирование функции validate_url
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_url
 class TestValidateUrl(unittest.TestCase):
     def test_valid_urls(self):
         valid_urls = [
@@ -56,28 +56,28 @@ class TestValidateUrl(unittest.TestCase):
             "https://www.dns-shop.ru/profile/orders"
         ]
         for url in valid_urls:
-            self.assertTrue(validate_url(url)[0], f"URL: {url} должен быть корректным")
+            self.assertTrue(validate_url(url)[0], f"URL: {url} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_urls(self):
         invalid_urls = [
-            "",                                     # Пустая строка
-            "   ",                                  # Строка из пробелов
-            "https://www dns-shop.ru",              # Пробел в домене
-            "https://www.dns-shop.ru/ catalog",     # Пробел в пути
-            "http://www.dns-shop.ru",               # Неправильный протокол
-            "https://dns-shop",                     # Без TLD
-            "ftp://www.dns-shop.ru",                # Неправильный протокол
-            "https://www.dns-shop.ru/#catalog",     # Фрагмент
-            "https://www.dns-shop..ru",             # Двойная точка
-            "https://www.dns-shop.ru/@catalog",     # Недопустимый символ
-            "https://днс-шоп.ру",                   # Русские символы
-            "https://www.dns-shop.ru:8080",         # Порт
-            "https:// www.dns-shop.ru"              # Пробел перед доменом
+            "",                                     # РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+            "   ",                                  # РЎС‚СЂРѕРєР° РёР· РїСЂРѕР±РµР»РѕРІ
+            "https://www dns-shop.ru",              # РџСЂРѕР±РµР» РІ РґРѕРјРµРЅРµ
+            "https://www.dns-shop.ru/ catalog",     # РџСЂРѕР±РµР» РІ РїСѓС‚Рё
+            "http://www.dns-shop.ru",               # РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ РїСЂРѕС‚РѕРєРѕР»
+            "https://dns-shop",                     # Р‘РµР· TLD
+            "ftp://www.dns-shop.ru",                # РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ РїСЂРѕС‚РѕРєРѕР»
+            "https://www.dns-shop.ru/#catalog",     # Р¤СЂР°РіРјРµРЅС‚
+            "https://www.dns-shop..ru",             # Р”РІРѕР№РЅР°СЏ С‚РѕС‡РєР°
+            "https://www.dns-shop.ru/@catalog",     # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
+            "https://РґРЅСЃ-С€РѕРї.СЂСѓ",                   # Р СѓСЃСЃРєРёРµ СЃРёРјРІРѕР»С‹
+            "https://www.dns-shop.ru:8080",         # РџРѕСЂС‚
+            "https:// www.dns-shop.ru"              # РџСЂРѕР±РµР» РїРµСЂРµРґ РґРѕРјРµРЅРѕРј
         ]
         for url in invalid_urls:
-            self.assertFalse(validate_url(url)[0], f"URL: {url} должен быть некорректным")
+            self.assertFalse(validate_url(url)[0], f"URL: {url} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
-# Тестирование функции validate_author
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_author
 class TestValidateAuthor(unittest.TestCase):
     def test_valid_authors(self):
         valid_authors = [
@@ -93,24 +93,24 @@ class TestValidateAuthor(unittest.TestCase):
             "Nikita_Stebunov-123"
         ]
         for author in valid_authors:
-            self.assertTrue(validate_author(author)[0], f"Author: {author} должен быть корректным")
+            self.assertTrue(validate_author(author)[0], f"Author: {author} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_authors(self):
         invalid_authors = [
-            "",                             # Пустая строка
-            "   ",                          # Строка из пробелов
-            "Nikita  Stebunov",             # Двойной пробел
-            "Ni",                           # Слишком короткое
-            "Nikita Stebunov" * 4,          # Слишком длинное
-            "Nikita@Stebunov",              # Недопустимый символ
-            "N i k i t a",                  # Отдельные буквы
-            "Никита Стебунов",              # Русские символы
-            "N I K I T A S T E B U N O V"   # Отдельные буквы
+            "",                             # РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+            "   ",                          # РЎС‚СЂРѕРєР° РёР· РїСЂРѕР±РµР»РѕРІ
+            "Nikita  Stebunov",             # Р”РІРѕР№РЅРѕР№ РїСЂРѕР±РµР»
+            "Ni",                           # РЎР»РёС€РєРѕРј РєРѕСЂРѕС‚РєРѕРµ
+            "Nikita Stebunov" * 4,          # РЎР»РёС€РєРѕРј РґР»РёРЅРЅРѕРµ
+            "Nikita@Stebunov",              # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
+            "N i k i t a",                  # РћС‚РґРµР»СЊРЅС‹Рµ Р±СѓРєРІС‹
+            "РќРёРєРёС‚Р° РЎС‚РµР±СѓРЅРѕРІ",              # Р СѓСЃСЃРєРёРµ СЃРёРјРІРѕР»С‹
+            "N I K I T A S T E B U N O V"   # РћС‚РґРµР»СЊРЅС‹Рµ Р±СѓРєРІС‹
         ]
         for author in invalid_authors:
-            self.assertFalse(validate_author(author)[0], f"Author: {author} должен быть некорректным")
+            self.assertFalse(validate_author(author)[0], f"Author: {author} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
-# Тестирование функции validate_title
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_title
 class TestValidateTitle(unittest.TestCase):
     def test_valid_titles(self):
         valid_titles = [
@@ -123,24 +123,24 @@ class TestValidateTitle(unittest.TestCase):
             "How to extend the battery life"
         ]
         for title in valid_titles:
-            self.assertTrue(validate_title(title)[0], f"Title: {title} должен быть корректным")
+            self.assertTrue(validate_title(title)[0], f"Title: {title} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_titles(self):
         invalid_titles = [
-            "",                                     # Пустая строка
-            "   ",                                  # Строка из пробелов
-            "How to  extend the battery life",      # Двойной пробел
-            "How",                                  # Слишком короткое
-            "How to extend the battery life? " * 5, # Слишком длинное
-            "12345",                                # Недостаточно букв
-            "How to extend the battery@life",       # Недопустимый символ
-            "Как продлить жизнь батареи?",          # Русские символы
-            "How to extend the battery#life"        # Недопустимый символ
+            "",                                     # РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+            "   ",                                  # РЎС‚СЂРѕРєР° РёР· РїСЂРѕР±РµР»РѕРІ
+            "How to  extend the battery life",      # Р”РІРѕР№РЅРѕР№ РїСЂРѕР±РµР»
+            "How",                                  # РЎР»РёС€РєРѕРј РєРѕСЂРѕС‚РєРѕРµ
+            "How to extend the battery life? " * 5, # РЎР»РёС€РєРѕРј РґР»РёРЅРЅРѕРµ
+            "12345",                                # РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р±СѓРєРІ
+            "How to extend the battery@life",       # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
+            "РљР°Рє РїСЂРѕРґР»РёС‚СЊ Р¶РёР·РЅСЊ Р±Р°С‚Р°СЂРµРё?",          # Р СѓСЃСЃРєРёРµ СЃРёРјРІРѕР»С‹
+            "How to extend the battery#life"        # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
         ]
         for title in invalid_titles:
-            self.assertFalse(validate_title(title)[0], f"Title: {title} должен быть некорректным")
+            self.assertFalse(validate_title(title)[0], f"Title: {title} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
-# Тестирование функции validate_phone
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_phone
 class TestValidatePhone(unittest.TestCase):
     def test_valid_phones(self):
         valid_phones = [
@@ -150,25 +150,25 @@ class TestValidatePhone(unittest.TestCase):
             "+79876543210"
         ]
         for phone in valid_phones:
-            self.assertTrue(validate_phone(phone)[0], f"Phone: {phone} должен быть корректным")
+            self.assertTrue(validate_phone(phone)[0], f"Phone: {phone} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_phones(self):
         invalid_phones = [
-            "",                        # Пустая строка
-            "   ",                     # Строка из пробелов
-            "+7 123 456 7890",         # Пробелы
-            "1234567890",              # Без +7
-            "+71234",                  # Слишком короткий
-            "+71234nikita",            # Буквы
-            "+81234567890",            # Неверный код страны
-            "+712345678901",           # Слишком длинный
-            "+7999123456",             # Слишком короткий
-            "+7 912 345 67 89"         # Пробелы в формате
+            "",                        # РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+            "   ",                     # РЎС‚СЂРѕРєР° РёР· РїСЂРѕР±РµР»РѕРІ
+            "+7 123 456 7890",         # РџСЂРѕР±РµР»С‹
+            "1234567890",              # Р‘РµР· +7
+            "+71234",                  # РЎР»РёС€РєРѕРј РєРѕСЂРѕС‚РєРёР№
+            "+71234nikita",            # Р‘СѓРєРІС‹
+            "+81234567890",            # РќРµРІРµСЂРЅС‹Р№ РєРѕРґ СЃС‚СЂР°РЅС‹
+            "+712345678901",           # РЎР»РёС€РєРѕРј РґР»РёРЅРЅС‹Р№
+            "+7999123456",             # РЎР»РёС€РєРѕРј РєРѕСЂРѕС‚РєРёР№
+            "+7 912 345 67 89"         # РџСЂРѕР±РµР»С‹ РІ С„РѕСЂРјР°С‚Рµ
         ]
         for phone in invalid_phones:
-            self.assertFalse(validate_phone(phone)[0], f"Phone: {phone} должен быть некорректным")
+            self.assertFalse(validate_phone(phone)[0], f"Phone: {phone} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
-# Тестирование функции validate_description
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_description
 class TestValidateDescription(unittest.TestCase):
     def test_valid_descriptions(self):
         valid_descriptions = [
@@ -179,25 +179,25 @@ class TestValidateDescription(unittest.TestCase):
             "Nikita Stebunov presents: A journey through testing with valid chars, numbers 123, and symbols!"
         ]
         for description in valid_descriptions:
-            self.assertTrue(validate_description(description)[0], f"Description: {description} должен быть корректным")
+            self.assertTrue(validate_description(description)[0], f"Description: {description} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_descriptions(self):
         invalid_descriptions = [
-            "",                             # Пустая строка
-            "   ",                          # Строка из пробелов
-            "Nikita  Stebunov",             # Слишком короткое
-            "Nikita Stebunov" * 22,         # Слишком длинное
-            "1234567890" * 5,               # Недостаточно букв
-            "Nikita@Stebunov Description",  # Недопустимый символ
-            "Никита Стебунов: Описание",    # Русские символы
-            "N I K I T A S T E B U N O V",  # Недостаточно букв
-            "Nikita  Stebunov description", # Двойной пробел
-            "Nikita#Stebunov Test"          # Недопустимый символ
+            "",                             # РџСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+            "   ",                          # РЎС‚СЂРѕРєР° РёР· РїСЂРѕР±РµР»РѕРІ
+            "Nikita  Stebunov",             # РЎР»РёС€РєРѕРј РєРѕСЂРѕС‚РєРѕРµ
+            "Nikita Stebunov" * 22,         # РЎР»РёС€РєРѕРј РґР»РёРЅРЅРѕРµ
+            "1234567890" * 5,               # РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р±СѓРєРІ
+            "Nikita@Stebunov Description",  # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
+            "РќРёРєРёС‚Р° РЎС‚РµР±СѓРЅРѕРІ: РћРїРёСЃР°РЅРёРµ",    # Р СѓСЃСЃРєРёРµ СЃРёРјРІРѕР»С‹
+            "N I K I T A S T E B U N O V",  # РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р±СѓРєРІ
+            "Nikita  Stebunov description", # Р”РІРѕР№РЅРѕР№ РїСЂРѕР±РµР»
+            "Nikita#Stebunov Test"          # РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЃРёРјРІРѕР»
         ]
         for description in invalid_descriptions:
-            self.assertFalse(validate_description(description)[0], f"Description: {description} должен быть некорректным")
+            self.assertFalse(validate_description(description)[0], f"Description: {description} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
-# Тестирование функции validate_image
+# РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ С„СѓРЅРєС†РёРё validate_image
 class TestValidateImage(unittest.TestCase):
     def test_valid_images(self):
         valid_image_png = Mock()
@@ -228,7 +228,7 @@ class TestValidateImage(unittest.TestCase):
             valid_image_st_jpg
         ]
         for image in valid_images:
-            self.assertTrue(validate_image(image)[0], f"Image: {image.filename} должен быть корректным")
+            self.assertTrue(validate_image(image)[0], f"Image: {image.filename} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
     def test_invalid_images(self):
         invalid_image_gif = Mock()
@@ -261,9 +261,9 @@ class TestValidateImage(unittest.TestCase):
         ]
         for image in invalid_images:
             if image is None:
-                self.assertFalse(validate_image(image)[0], f"Image: None должен быть некорректным")
+                self.assertFalse(validate_image(image)[0], f"Image: None РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
             else:
-                self.assertFalse(validate_image(image)[0], f"Image: {image.filename} должен быть некорректным")
+                self.assertFalse(validate_image(image)[0], f"Image: {image.filename} РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рј")
 
 if __name__ == '__main__':
     unittest.main()
