@@ -1,0 +1,22 @@
+[
+    {
+        "name": "GadgetWorld",
+        "email": "info@gadgetworld.com",
+        "address": "456 Gadget Avenue, London",
+        "region_code": "+44",
+        "phone": "(207) 123-4567",
+        "description": "Specializes in premium phone cases and chargers.",
+        "date": "2025-05-15",
+        "logo": "/static/images/partners/4e46bb7dcd1b554d444daddb9b513ed9.jpg"
+    },
+    {
+        "name": "DNS",
+        "email": "dns@mail.com",
+        "address": "Gatchina",
+        "region_code": "+7",
+        "phone": "(987) 789-5676",
+        "description": "Cool Phone Shop",
+        "date": "2025-05-25",
+        "logo": "/static/images/partners/58700ac6-a347-4a2e-9cef-3f0ffe3c4c0e.png"
+    }
+]
