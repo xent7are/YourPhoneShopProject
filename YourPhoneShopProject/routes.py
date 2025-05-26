@@ -42,7 +42,7 @@ def about():
 def users():
     """Renders the users page."""
     result = handle_users()
-    if result is None:  # Перенаправление после POST
+    if result is None:
         return
     return result
 
