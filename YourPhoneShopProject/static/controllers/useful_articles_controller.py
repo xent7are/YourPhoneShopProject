@@ -18,15 +18,14 @@ def get_articles():
             data = json.load(file)
         for author_name, author_data in data['authors'].items():
             for date, date_articles in author_data['articles_by_date'].items():
-                for article in date_articles:
-                    # Парсинг даты и времени статьи
+                for idx, article in enumerate(date_articles):
                     datetime_obj = datetime.strptime(date + ' ' + article['time'], '%Y-%m-%d %H:%M')
                     article['date_added'] = datetime_obj.strftime('%d.%m.%Y %H:%M')
                     article['author'] = author_name
                     article['email'] = author_data.get('email', '')
                     article['phone'] = author_data.get('phone', '')
+                    article['index_in_date'] = idx
                     articles.append(article)
-        # Сортировка статей по дате (новые первыми)
         articles.sort(key=lambda x: x['date_added'], reverse=True)
     except (FileNotFoundError, json.JSONDecodeError):
         pass
