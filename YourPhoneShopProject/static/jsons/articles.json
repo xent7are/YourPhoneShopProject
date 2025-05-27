@@ -32,6 +32,21 @@
           }
         ]
       }
+    },
+    "nikita": {
+      "email": "nikitastebunov14@gmail.com",
+      "phone": "+79045555555",
+      "articles_by_date": {
+        "2025-05-27": [
+          {
+            "title": "How do I choose a smartphone with a really high-quality camera?",
+            "image": "/static/images/articles/9d1b32c5-b043-4fb6-a3b1-f106a58cd376.png",
+            "description": "A good camera is a key criterion when choosing a smartphone. Pay attention to the resolution, the number of megapixels, the sensitivity of the sensor and additional functions, such as optical stabilization. Image processing algorithms are also important.",
+            "link": "https://club.dns-shop.ru/blog/t-78-smartfonyi/63908-kak-vyibrat-smartfon-s-deistvitelno-kachestvennoi-kameroi/?ysclid=mb6f26mjtw934845250",
+            "time": "14:12"
+          }
+        ]
+      }
     }
   }
 }

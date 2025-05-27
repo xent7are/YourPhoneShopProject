@@ -92,7 +92,7 @@
                     const date = this.dataset.date;
                     const index = this.dataset.index;
                     if (confirm('Are you sure you want to delete this article?')) {
-                        fetch('/delete_article', {
+                        fetch('/deleteArticle', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ author, date, index })
@@ -136,7 +136,7 @@
                         </div>
                         <div class="button-group">
                             <a href="{{article['link']}}" class="read-more" target="_blank">Read more</a>
-                            <button class="delete-article" data-author="{{article['author']}}" data-date="{{article['date_added'].split(' ')[0].split('.')[2] + '-' + article['date_added'].split(' ')[0].split('.')[1] + '-' + article['date_added'].split(' ')[0].split('.')[0]}}" data-index="{{i}}"></button>
+                            <button class="delete-article" data-author="{{article['author']}}" data-date="{{article['date_added'].split(' ')[0].split('.')[2] + '-' + article['date_added'].split(' ')[0].split('.')[1] + '-' + article['date_added'].split(' ')[0].split('.')[0]}}" data-index="{{article['index_in_date']}}"></button>
                         </div>
                     </div>
                 </div>
