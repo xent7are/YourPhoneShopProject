@@ -227,6 +227,14 @@ def validate_article_form(data, image_file, existing_articles):
         # Чтение JSON-файла
         with open(json_file, 'r', encoding='utf-8') as file:
             articles_data = json.load(file)
+        # Проверка уникальности заголовка
+        new_title = data['title']
+        for author_name, author_data in articles_data['authors'].items():
+            for date, date_articles in author_data['articles_by_date'].items():
+                for article in date_articles:
+                    if article['title'].lower() == new_title.lower():
+                        errors.append(f"Статья с заголовком '{new_title}' уже существует.")
+                        break
         # Проверка соответствия email и телефона для существующего автора
         if data['author'] in articles_data['authors']:
             existing_email = articles_data['authors'][data['author']].get('email', '')

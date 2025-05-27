@@ -18,7 +18,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>YourPhoneShopProject</Name>
     <RootNamespace>YourPhoneShopProject</RootNamespace>
-    <InterpreterId>MSBuild|env3.9|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env_nik|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
     <UnitTestRootDirectory>static/tests/</UnitTestRootDirectory>
