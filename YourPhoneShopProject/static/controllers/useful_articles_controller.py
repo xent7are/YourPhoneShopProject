@@ -14,11 +14,14 @@ def get_articles():
     json_file = 'static/jsons/articles.json'
     articles = []
     try:
+        # Загрузка данных из JSON-файла
         with open(json_file, 'r', encoding='utf-8') as file:
             data = json.load(file)
+        # Обход авторов и их статей для формирования списка
         for author_name, author_data in data['authors'].items():
             for date, date_articles in author_data['articles_by_date'].items():
                 for idx, article in enumerate(date_articles):
+                    # Преобразование строки даты и времени в объект datetime
                     datetime_obj = datetime.strptime(date + ' ' + article['time'], '%Y-%m-%d %H:%M')
                     article['date_added'] = datetime_obj.strftime('%d.%m.%Y %H:%M')
                     article['author'] = author_name
@@ -26,8 +29,10 @@ def get_articles():
                     article['phone'] = author_data.get('phone', '')
                     article['index_in_date'] = idx
                     articles.append(article)
+        # Сортировка статей по дате добавления в обратном порядке
         articles.sort(key=lambda x: x['date_added'], reverse=True)
     except (FileNotFoundError, json.JSONDecodeError):
+        # Возвращение пустого списка в случае ошибки чтения файла
         pass
     return articles
 
@@ -41,6 +46,7 @@ def save_articles(articles_data):
         with open(json_file, 'w', encoding='utf-8') as file:
             json.dump(articles_data, file, ensure_ascii=False, indent=4)
     except Exception as e:
+        # Выброс исключения с описанием ошибки
         raise Exception(f"Error saving articles: {str(e)}")
 
 # Функция для проверки адреса электронной почты
@@ -147,6 +153,7 @@ def validate_phone(phone):
     # Проверка, что после +7 идут только цифры
     if not phone[1:].isdigit():
         return False, "Phone number must contain only digits after +7."
+    # Проверка номера с использованием библиотеки phonenumbers
     try:
         # Парсинг номера телефона
         parsed_phone = phonenumbers.parse(phone, "RU")
@@ -192,6 +199,7 @@ def validate_image(image_file):
 # Функция для валидации формы добавления статьи
 def validate_article_form(data, image_file, existing_articles):
     errors = []
+    # Проверка всех полей формы
     is_valid, result = validate_author(data.get('author', '').strip())
     if not is_valid:
         errors.append(result)
@@ -231,7 +239,7 @@ def validate_article_form(data, image_file, existing_articles):
         # Чтение JSON-файла
         with open(json_file, 'r', encoding='utf-8') as file:
             articles_data = json.load(file)
-        # Проверка уникальности заголовка
+        # Проверка уникальности заголовка среди всех статей
         new_title = data['title']
         for author_name, author_data in articles_data['authors'].items():
             for date, date_articles in author_data['articles_by_date'].items():
@@ -256,6 +264,7 @@ def validate_article_form(data, image_file, existing_articles):
                     if author_data.get('phone') == data['phone']:
                         errors.append("The provided phone number is already used by another author.")
     except (FileNotFoundError, json.JSONDecodeError):
+        # Игнорирование ошибок чтения файла
         pass
     return errors
 
@@ -267,6 +276,7 @@ def handle_articles():
     show_form = False
     if request.method == 'POST':
         show_form = True
+        # Получение данных из формы
         form_data['author'] = request.forms.get('author', '').strip()
         form_data['email'] = request.forms.get('email', '').strip()
         form_data['phone'] = request.forms.get('phone', '').strip()
@@ -276,6 +286,7 @@ def handle_articles():
         image = request.files.get('image')
         errors = validate_article_form(form_data, image, articles)
         if not errors:
+            # Сохранение загруженного изображения
             ext = os.path.splitext(image.filename)[1]
             filename = f"{uuid.uuid4()}{ext}"
             save_dir = 'static/images/articles'
@@ -295,7 +306,9 @@ def handle_articles():
                 with open(json_file, 'r', encoding='utf-8') as file:
                     articles_data = json.load(file)
             except (FileNotFoundError, json.JSONDecodeError):
+                # Создание новой структуры при отсутствии файла
                 pass
+            # Формирование новой статьи
             new_article = {
                 'title': form_data['title'],
                 'image': image_path,
@@ -305,12 +318,14 @@ def handle_articles():
             }
             author = form_data['author']
             if author not in articles_data['authors']:
+                # Добавление нового автора
                 articles_data['authors'][author] = {
                     'email': form_data['email'],
                     'phone': form_data['phone'],
                     'articles_by_date': {}
                 }
             if current_date not in articles_data['authors'][author]['articles_by_date']:
+                # Создание новой даты для статей автора
                 articles_data['authors'][author]['articles_by_date'][current_date] = []
             articles_data['authors'][author]['articles_by_date'][current_date].append(new_article)
             save_articles(articles_data)
@@ -318,6 +333,7 @@ def handle_articles():
             response.status = 303
             form_data = {'author': '', 'email': '', 'phone': '', 'title': '', 'description': '', 'link': ''}
             show_form = False
+    # Формирование ответа для шаблона
     return {
         'articles': articles,
         'title': 'Useful Articles',
@@ -334,6 +350,7 @@ def delete_article():
     date = data.get('date')
     index = data.get('index')
     if not all([author, date, index is not None]):
+        # Проверка наличия всех необходимых параметров
         response.status = 400
         return {'status': 'error', 'message': 'Invalid request parameters'}
     json_file = 'static/jsons/articles.json'
@@ -348,6 +365,7 @@ def delete_article():
         articles = articles_data['authors'][author]['articles_by_date'][date]
         index = int(index)
         if 0 <= index < len(articles):
+            # Удаление статьи по индексу
             articles.pop(index)
             # Удаление даты, если нет статей
             if not articles:

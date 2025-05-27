@@ -6,7 +6,9 @@ from static.controllers.useful_articles_controller import validate_email, valida
 
 # Тестирование функции validate_email
 class TestValidateEmail(unittest.TestCase):
+    # Проверка корректных адресов электронной почты
     def test_valid_emails(self):
+        # Формирование списка допустимых email
         valid_emails = [
             "nikita@gmail.com",
             "nikita.stebunov@yandex.ru",
@@ -21,7 +23,9 @@ class TestValidateEmail(unittest.TestCase):
         for email in valid_emails:
             self.assertTrue(validate_email(email)[0], f"Email: {email} должен быть корректным")
 
+    # Проверка некорректных адресов электронной почты
     def test_invalid_emails(self):
+        # Формирование списка недопустимых email
         invalid_emails = [
             "",                                 # Пустая строка
             "   ",                              # Строка из пробелов
@@ -44,7 +48,9 @@ class TestValidateEmail(unittest.TestCase):
 
 # Тестирование функции validate_url
 class TestValidateUrl(unittest.TestCase):
+    # Проверка корректных URL-адресов
     def test_valid_urls(self):
+        # Формирование списка допустимых URL
         valid_urls = [
             "https://www.dns-shop.ru",
             "https://www.dns-shop.ru/catalog",
@@ -58,7 +64,9 @@ class TestValidateUrl(unittest.TestCase):
         for url in valid_urls:
             self.assertTrue(validate_url(url)[0], f"URL: {url} должен быть корректным")
 
+    # Проверка некорректных URL-адресов
     def test_invalid_urls(self):
+        # Формирование списка недопустимых URL
         invalid_urls = [
             "",                                     # Пустая строка
             "   ",                                  # Строка из пробелов
@@ -79,7 +87,9 @@ class TestValidateUrl(unittest.TestCase):
 
 # Тестирование функции validate_author
 class TestValidateAuthor(unittest.TestCase):
+    # Проверка корректных имен авторов
     def test_valid_authors(self):
+        # Формирование списка допустимых имен авторов
         valid_authors = [
             "Nikita Stebunov",
             "Nikita",
@@ -95,7 +105,9 @@ class TestValidateAuthor(unittest.TestCase):
         for author in valid_authors:
             self.assertTrue(validate_author(author)[0], f"Author: {author} должен быть корректным")
 
+    # Проверка некорректных имен авторов
     def test_invalid_authors(self):
+        # Формирование списка недопустимых имен авторов
         invalid_authors = [
             "",                             # Пустая строка
             "   ",                          # Строка из пробелов
@@ -112,7 +124,9 @@ class TestValidateAuthor(unittest.TestCase):
 
 # Тестирование функции validate_title
 class TestValidateTitle(unittest.TestCase):
+    # Проверка корректных заголовков статей
     def test_valid_titles(self):
+        # Формирование списка допустимых заголовков
         valid_titles = [
             "How to extend the battery life?",
             "How to extend the battery life!: Tips",
@@ -125,7 +139,9 @@ class TestValidateTitle(unittest.TestCase):
         for title in valid_titles:
             self.assertTrue(validate_title(title)[0], f"Title: {title} должен быть корректным")
 
+    # Проверка некорректных заголовков статей
     def test_invalid_titles(self):
+        # Формирование списка недопустимых заголовков
         invalid_titles = [
             "",                                     # Пустая строка
             "   ",                                  # Строка из пробелов
@@ -142,7 +158,9 @@ class TestValidateTitle(unittest.TestCase):
 
 # Тестирование функции validate_phone
 class TestValidatePhone(unittest.TestCase):
+    # Проверка корректных номеров телефона
     def test_valid_phones(self):
+        # Формирование списка допустимых номеров телефона
         valid_phones = [
             "+71234567890",
             "+79991234567",
@@ -152,7 +170,9 @@ class TestValidatePhone(unittest.TestCase):
         for phone in valid_phones:
             self.assertTrue(validate_phone(phone)[0], f"Phone: {phone} должен быть корректным")
 
+    # Проверка некорректных номеров телефона
     def test_invalid_phones(self):
+        # Формирование списка недопустимых номеров телефона
         invalid_phones = [
             "",                        # Пустая строка
             "   ",                     # Строка из пробелов
@@ -170,56 +190,79 @@ class TestValidatePhone(unittest.TestCase):
 
 # Тестирование функции validate_description
 class TestValidateDescription(unittest.TestCase):
+    # Проверка корректных описаний статей
     def test_valid_descriptions(self):
+        # Формирование списка допустимых описаний
         valid_descriptions = [
-            "Nikita Stebunov wrote this description to test the validation. It has enough letters to pass.",
-            "Nikita's article: Lorem ipsum dolor sit amet, consectetur adipiscing elit, authored by Stebunov.",
-            "Nikita, test 123! Description by Stebunov with allowed chars.",
+            "To extend the life of the battery, avoid full discharge and overcharging.",
+            "Nikita's article: To extend the life of the battery, avoid full discharge and overcharging.",
+            "Nikita, test 123! To extend the life of the battery, avoid full discharge and overcharging.",
             "Stebunov Nikita: This is a detailed test description with enough letters to meet the requirements.",
             "Nikita Stebunov presents: A journey through testing with valid chars, numbers 123, and symbols!"
         ]
         for description in valid_descriptions:
             self.assertTrue(validate_description(description)[0], f"Description: {description} должен быть корректным")
 
+    # Проверка некорректных описаний статей
     def test_invalid_descriptions(self):
+        # Формирование списка недопустимых описаний с разной длиной
         invalid_descriptions = [
-            "",                             # Пустая строка
-            "   ",                          # Строка из пробелов
-            "Nikita  Stebunov",             # Слишком короткое
-            "Nikita Stebunov" * 22,         # Слишком длинное
-            "1234567890" * 5,               # Недостаточно букв
-            "Nikita@Stebunov Description",  # Недопустимый символ
-            "Никита Стебунов: Описание",    # Русские символы
-            "N I K I T A S T E B U N O V",  # Недостаточно букв
-            "Nikita  Stebunov description", # Двойной пробел
-            "Nikita#Stebunov Test"          # Недопустимый символ
+            "",                                 # Пустая строка
+            "   ",                              # Строка из пробелов
+            "Nikita Stebunov",                  # Слишком короткое (менее 50 символов)
+            "Nikita Stebunov" * 25,             # Слишком длинное (более 300 символов)
+            "1234567890" * 5,                   # Недостаточно букв (менее 47 букв)
+            "Nikita@Stebunov Description" * 4,  # Недопустимый символ
+            "Никита Стебунов: Описание" * 4,    # Русские символы
+            "N I K I T A S T E B U N O V",      # Недостаточно букв
+            "Nikita#Stebunov Test" * 4,         # Недопустимый символ
+            "Short desc 123",                   # Слишком короткое (менее 50 символов)
+            "a1234567890" * 10                  # Недостаточно букв (100 символов, но мало букв)
         ]
         for description in invalid_descriptions:
             self.assertFalse(validate_description(description)[0], f"Description: {description} должен быть некорректным")
 
 # Тестирование функции validate_image
 class TestValidateImage(unittest.TestCase):
+    # Проверка корректных изображений
     def test_valid_images(self):
+        # Создание мок-объектов для изображений в допустимых форматах
+        # Создание мок-объекта для файла PNG
         valid_image_png = Mock()
+        # Установка имени файла для PNG
         valid_image_png.filename = "nikita.png"
         valid_image_png.content_type = 'image/png'
+        # Проверка соответствия формата PNG
 
+        # Создание мок-объекта для файла JPG
         valid_image_jpg = Mock()
+        # Установка имени файла для JPG
         valid_image_jpg.filename = 'nikita.jpg'
         valid_image_jpg.content_type = 'image/jpeg'
+        # Проверка соответствия формата JPG
 
+        # Создание мок-объекта для файла JPEG
         valid_image_jpeg = Mock()
+        # Установка имени файла для JPEG
         valid_image_jpeg.filename = "nikita.jpeg"
         valid_image_jpeg.content_type = 'image/jpeg'
+        # Проверка соответствия формата JPEG
 
+        # Создание мок-объекта для файла PNG с подчеркиванием
         valid_image_st_png = Mock()
+        # Установка имени файла с подчеркиванием для PNG
         valid_image_st_png.filename = "nikita_stebunov.png"
         valid_image_st_png.content_type = "image/png"
+        # Проверка имени файла с подчеркиванием и формата PNG
 
+        # Создание мок-объекта для файла JPG с подчеркиванием
         valid_image_st_jpg = Mock()
+        # Установка имени файла с подчеркиванием для JPG
         valid_image_st_jpg.filename = "nikita_stebunov.jpg"
         valid_image_st_jpg.content_type = "image/jpeg"
+        # Проверка имени файла с подчеркиванием и формата JPG
 
+        # Формирование списка корректных изображений для проверки
         valid_images = [
             valid_image_png,
             valid_image_jpg,
@@ -227,38 +270,58 @@ class TestValidateImage(unittest.TestCase):
             valid_image_st_png,
             valid_image_st_jpg
         ]
+        # Проверка каждого изображения на соответствие требованиям формата и имени файла
         for image in valid_images:
             self.assertTrue(validate_image(image)[0], f"Image: {image.filename} должен быть корректным")
 
+    # Проверка некорректных изображений
     def test_invalid_images(self):
+        # Создание мок-объектов для изображений с недопустимыми параметрами
+        # Создание мок-объекта для файла GIF
         invalid_image_gif = Mock()
+        # Установка имени файла для недопустимого формата GIF
         invalid_image_gif.filename = "nikita.gif"
         invalid_image_gif.content_type = "image/gif"
+        # Проверка недопустимого формата GIF
 
+        # Создание мок-объекта для текстового файла
         invalid_image_not_image = Mock()
+        # Установка имени файла для не-изображения
         invalid_image_not_image.filename = "nikita.txt"
         invalid_image_not_image.content_type = "text/plain"
+        # Проверка неподдерживаемого типа файла
 
+        # Создание мок-объекта для файла без расширения
         invalid_image_no_ext = Mock()
+        # Установка имени файла без расширения
         invalid_image_no_ext.filename = "nikita"
         invalid_image_no_ext.content_type = "image/png"
+        # Проверка отсутствия расширения в имени файла
 
+        # Создание мок-объекта для файла с пустым именем
         invalid_image_empty = Mock()
+        # Установка пустого имени файла
         invalid_image_empty.filename = ""
         invalid_image_empty.content_type = "image/png"
+        # Проверка пустого имени файла
 
+        # Создание мок-объекта для файла с пробелом в имени
         invalid_image_space = Mock()
+        # Установка имени файла с пробелом
         invalid_image_space.filename = "nikita stebunov.png"
         invalid_image_space.content_type = "image/png"
+        # Проверка наличия пробела в имени файла
 
+        # Формирование списка некорректных изображений, включая случай отсутствия файла
         invalid_images = [
-            None,
-            invalid_image_gif,
-            invalid_image_not_image,
-            invalid_image_no_ext,
-            invalid_image_empty,
-            invalid_image_space
+            None,                           # Отсутствие файла
+            invalid_image_gif,              # Недопустимый формат
+            invalid_image_not_image,        # Не-изображение
+            invalid_image_no_ext,           # Отсутствие расширения
+            invalid_image_empty,            # Пустое имя файла
+            invalid_image_space             # Пробел в имени файла
         ]
+        # Проверка каждого случая на несоответствие требованиям формата, имени файла или наличия файла
         for image in invalid_images:
             if image is None:
                 self.assertFalse(validate_image(image)[0], f"Image: None должен быть некорректным")
