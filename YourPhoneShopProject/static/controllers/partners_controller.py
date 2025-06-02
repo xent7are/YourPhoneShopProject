@@ -8,25 +8,25 @@ import uuid
 PARTNERS_FILE = 'static/jsons/active_partners.json'
 UPLOAD_DIR = 'static/images/partners'
 
-def load_partners():# загрузка файла с партнёрами
+def load_partners():# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if os.path.exists(PARTNERS_FILE):
         with open(PARTNERS_FILE, 'r') as f:
             return json.load(f)
     return []
 
-def save_partners(partners):# сохранение партнёров в файл
+def save_partners(partners):# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
     with open(PARTNERS_FILE, 'w') as f:
         json.dump(partners, f, indent=4)
 
 @route('/partners')
-def partners_get(): # загрузка существующих партнёров
+def partners_get(): # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     partners = load_partners()
-    # Сортировка партнёров по новизне
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     partners.sort(key=lambda x: x.get('date', ''), reverse=True)
     return template('partners.tpl', partners=partners, errors=None, form_data={}, year=datetime.now().year)
 
 @post('/partners')
-def partners_post(): # запись данных из формы добавления партнёров
+def partners_post(): # пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     name = request.forms.get('name').strip()
     email = request.forms.get('email').strip()
     address = request.forms.get('address').strip()
@@ -43,7 +43,7 @@ def partners_post(): # запись данных из формы добавления партнёров
         'phone': phone
     }
     
-    # Проверки
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if not name:
         errors.append("Name or Company is required.")
     if not email:
@@ -70,21 +70,21 @@ def partners_post(): # запись данных из формы добавления партнёров
         if not partner_logo.content_type in ['image/png', 'image/jpeg']:
             errors.append("Logo must be a PNG or JPG file.")
     
-    if errors: # загружаем нового пользователя в отсортированный список
+    if errors: # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         partners = load_partners()
         partners.sort(key=lambda x: x.get('date', ''), reverse=True)
         return template('partners.tpl', partners=partners, errors=errors, form_data=form_data, year=datetime.now().year)
     
-    # Сохранение логотипа партнёра
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     logo_path = ''
     if partner_logo:
-        os.makedirs(UPLOAD_DIR, exist_ok=True) # создание директории для сохранения
-        file_extension = os.path.splitext(partner_logo.filename)[1].lower() # извлечение расширения из загруженного файла
+        os.makedirs(UPLOAD_DIR, exist_ok=True) # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        file_extension = os.path.splitext(partner_logo.filename)[1].lower() # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         filename = f"{uuid.uuid4()}{file_extension}"
         logo_path = f"/{UPLOAD_DIR}/{filename}"
         partner_logo.save(os.path.join(UPLOAD_DIR, filename))
     
-    # Добавление нового партнёра
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     partners = load_partners()
     new_partner = {
         'name': name,
@@ -99,7 +99,7 @@ def partners_post(): # запись данных из формы добавления партнёров
     partners.append(new_partner)
     save_partners(partners)
     
-    # Очистка формы
+    # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     return template('partners.tpl', partners=partners, errors=None, form_data={}, year=datetime.now().year)
 
 @post('/delete_partner')
