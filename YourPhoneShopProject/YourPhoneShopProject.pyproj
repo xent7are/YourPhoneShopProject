@@ -18,7 +18,10 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>YourPhoneShopProject</Name>
     <RootNamespace>YourPhoneShopProject</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.12</InterpreterId>
+    <InterpreterId>MSBuild|env_nik|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>unittest</TestFramework>
+    <UnitTestPattern>test*.py</UnitTestPattern>
+    <UnitTestRootDirectory>static/tests/</UnitTestRootDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,19 +37,32 @@
     <Compile Include="static\controllers\partners_controller.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="static\controllers\useful_articles_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="static\controllers\user_controller.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="static\tests\test_useful_articles_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="static\tests\test_user_controller.py" />
+    <Compile Include="static\tests\__init__.py" />
+    <Compile Include="static\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\" />
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
+    <Folder Include="static\images\user_icons\" />
+    <Folder Include="static\images\articles\" />
     <Folder Include="static\images\partners\" />
     <Folder Include="static\jsons\" />
     <Folder Include="static\controllers\" />
     <Folder Include="static\scripts\" />
+    <Folder Include="static\tests\" />
+    <Folder Include="static\tests\__pycache__\" />
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +75,9 @@
     <Content Include="static\content\main_site.css" />
     <Content Include="static\content\partners.css" />
     <Content Include="static\content\site.css" />
+    <Content Include="static\content\usefulArticlesStyle.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\content\viewFavStyle.css" />
     <Content Include="static\content\viewingProductStyle.css">
       <SubType>Code</SubType>
@@ -71,6 +90,10 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="static\images\account.png" />
+    <Content Include="static\images\addArticle.png" />
+    <Content Include="static\images\articles\article1.jpg" />
+    <Content Include="static\images\articles\article2.jpg" />
+    <Content Include="static\images\articles\article3.jpg" />
     <Content Include="static\images\blueHeart.png" />
     <Content Include="static\images\checkMark.png" />
     <Content Include="static\images\honor.jpg" />
@@ -86,10 +109,19 @@
     <Content Include="static\images\rubbish.png" />
     <Content Include="static\images\samsungA35.png" />
     <Content Include="static\images\star.png" />
+    <Content Include="static\images\user_icons\20250312_121023_Xrustaleva_Uliana.jpg" />
+    <Content Include="static\images\user_icons\20250313_123545_Chernyshova_Sofya.jpg" />
+    <Content Include="static\images\user_icons\default_profile.png" />
+    <Content Include="static\images\user_icons\photo_sonya.jpg" />
+    <Content Include="static\images\user_icons\photo_uliana.jpg" />
+    <Content Include="static\images\usefulArticles.png" />
     <Content Include="static\images\whiteHeart.png" />
     <Content Include="static\images\xiaomi.png" />
     <Content Include="static\jsons\active_partners.json" />
     <Content Include="static\jsons\active_users.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\jsons\articles.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\scripts\bootstrap.js" />
@@ -107,10 +139,15 @@
     <Content Include="static\scripts\respond.js" />
     <Content Include="static\scripts\respond.min.js" />
     <Content Include="static\scripts\_references.js" />
+    <Content Include="static\tests\__pycache__\test_user_controller.cpython-39.pyc" />
+    <Content Include="static\tests\__pycache__\__init__.cpython-39.pyc" />
     <Content Include="views\about.tpl" />
     <Content Include="views\contact.tpl" />
     <Content Include="views\index.tpl" />
     <Content Include="views\layout.tpl" />
+    <Content Include="views\usefulArticles.tpl">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\viewFav.tpl" />
     <Content Include="views\viewingProduct.tpl">
       <SubType>Code</SubType>
@@ -161,6 +198,15 @@
       <Id>env</Id>
       <Version>3.11</Version>
       <Description>env (Python 3.11)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="env_nik\">
+      <Id>env_nik</Id>
+      <Version>3.11</Version>
+      <Description>env_nik (Python 3.11)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
