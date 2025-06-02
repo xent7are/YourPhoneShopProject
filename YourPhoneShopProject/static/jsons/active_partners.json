@@ -1,13 +1,13 @@
 [
     {
-        "name": "GadgetWorld",
-        "email": "info@gadgetworld.com",
-        "address": "456 Gadget Avenue, London",
-        "region_code": "+44",
-        "phone": "(207) 123-4567",
-        "description": "Specializes in premium phone cases and chargers.",
-        "date": "2025-05-15",
-        "logo": "/static/images/partners/4e46bb7dcd1b554d444daddb9b513ed9.jpg"
+        "name": "Yandex Market",
+        "email": "yandex@ya.ru",
+        "address": "Florida, 22 Tower street",
+        "region_code": "+1",
+        "phone": "(222) 222-2222",
+        "description": "Product supplier",
+        "date": "2025-05-26",
+        "logo": "/static/images/partners/627c1da9-ba0c-49bd-92c5-fd30a1380b8f.jpg"
     },
     {
         "name": "DNS",
@@ -20,13 +20,13 @@
         "logo": "/static/images/partners/58700ac6-a347-4a2e-9cef-3f0ffe3c4c0e.png"
     },
     {
-        "name": "Yandex Market",
-        "email": "yandex@ya.ru",
-        "address": "Florida, 22 Tower street",
-        "region_code": "+1",
-        "phone": "(222) 222-2222",
-        "description": "Product supplier",
-        "date": "2025-05-26",
-        "logo": "/static/images/partners/627c1da9-ba0c-49bd-92c5-fd30a1380b8f.jpg"
+        "name": "GadgetWorld",
+        "email": "info@gadgetworld.com",
+        "address": "456 Gadget Avenue, London",
+        "region_code": "+44",
+        "phone": "(207) 123-4567",
+        "description": "Specializes in premium phone cases and chargers.",
+        "date": "2025-05-15",
+        "logo": "/static/images/partners/4e46bb7dcd1b554d444daddb9b513ed9.jpg"
     }
 ]

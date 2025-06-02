@@ -110,6 +110,10 @@ def partners_post(): # запись данных из формы добавления партнёров
         'logo': logo_path
     }
     partners.append(new_partner)
+    
+    # Сортировка списка перед сохранением
+    partners.sort(key=lambda x: x.get('date', ''), reverse=True)
+    
     save_partners(partners)
     
     # Удаление временного файла логотипа, если он был создан
