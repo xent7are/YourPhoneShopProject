@@ -55,12 +55,9 @@
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
-<<<<<<<<< Temporary merge branch 1
     <Folder Include="static\images\articles\" />
     <Folder Include="static\images\partners\" />
-=========
     <Folder Include="static\images\user_icons\" />
->>>>>>>>> Temporary merge branch 2
     <Folder Include="static\jsons\" />
     <Folder Include="static\controllers\" />
     <Folder Include="static\scripts\" />
@@ -112,15 +109,12 @@
     <Content Include="static\images\rubbish.png" />
     <Content Include="static\images\samsungA35.png" />
     <Content Include="static\images\star.png" />
-<<<<<<<<< Temporary merge branch 1
     <Content Include="static\images\usefulArticles.png" />
-=========
     <Content Include="static\images\user_icons\20250312_121023_Xrustaleva_Uliana.jpg" />
     <Content Include="static\images\user_icons\20250313_123545_Chernyshova_Sofya.jpg" />
     <Content Include="static\images\user_icons\default_profile.png" />
     <Content Include="static\images\user_icons\photo_sonya.jpg" />
     <Content Include="static\images\user_icons\photo_uliana.jpg" />
->>>>>>>>> Temporary merge branch 2
     <Content Include="static\images\whiteHeart.png" />
     <Content Include="static\images\xiaomi.png" />
     <Content Include="static\jsons\active_partners.json" />
