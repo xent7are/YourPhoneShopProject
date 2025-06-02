@@ -103,6 +103,7 @@ def handle_users():
 
     # Сортировка пользователей по дате регистрации (новые первыми)
     users.sort(key=lambda x: x['registration_date'], reverse=True)
+    # либо так: users = sorted(users, key=lambda x: x['registration_date'], reverse=True)
 
     return {
         'users': users,
@@ -125,10 +126,12 @@ def validate_user_form(data, file=None, existing_users=None):
     errors = []
     existing_users = existing_users or []
 
-    # Проверка имени (не пустое, ≤ 64 символов, только латинские буквы)
+    # Проверка имени (не пустое, 3 <= имя <= 64 символов, только латинские буквы)
     name = data.get('name', '').strip()
     if not name:
         errors.append("Name field is required!")
+    elif len(name) < 3:
+        errors.append("Name mustn't be less than 3 characters!")
     elif len(name) > 64:
         errors.append("Name must be no more than 64 characters!")
     elif not re.match(r'^[a-zA-Z\s]+$', name):
